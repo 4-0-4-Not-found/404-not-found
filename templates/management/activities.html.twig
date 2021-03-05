@@ -1,0 +1,26 @@
+{% extends 'activities.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Acttivities</h1>
+
+    <div class="row">
+    {% for activite in activites %}
+    <div class="col">
+        <div class="card" style="width:300px">
+            <img class="card-img-top" src="/uploads/images/{{activite.image}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{ activite.nom }}</h4>
+                <p class="card-text">{{ activite.description }}</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+        </div>
+    </div>
+            {% endfor %}
+
+
+    </div>
+    </div>
+
+{% endblock %}
