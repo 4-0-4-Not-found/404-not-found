@@ -62,6 +62,11 @@ class User implements UserInterface
      */
     private $tel;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $activation_token;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -182,6 +187,18 @@ class User implements UserInterface
     public function setTel(int $tel): self
     {
         $this->tel = $tel;
+
+        return $this;
+    }
+
+    public function getActivationToken(): ?string
+    {
+        return $this->activation_token;
+    }
+
+    public function setActivationToken(string $activation_token): self
+    {
+        $this->activation_token = $activation_token;
 
         return $this;
     }
