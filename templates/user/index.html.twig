@@ -16,6 +16,8 @@
             <th>Prenom</th>
             <th>Email</th>
             <th>Telephone</th>
+            <th>operations</th>
+            <th>active</th>
         </tr>
         </thead>
         <tbody>
@@ -27,9 +29,13 @@
                 <td>{{ user.prenom }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.tel }}</td>
+
                  <td>
                     <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+                <td>
+                    <input type="checkbox" {% if user.validation %}checked {% endif %} onchange="changeValidation({{ user.id }})" data-toggle="toggle" data-size="xs">
                 </td>
             </tr>
         {% else %}

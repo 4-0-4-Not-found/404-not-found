@@ -67,6 +67,11 @@ class User implements UserInterface
      */
     private $activation_token;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $validation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -199,6 +204,18 @@ class User implements UserInterface
     public function setActivationToken(string $activation_token): self
     {
         $this->activation_token = $activation_token;
+
+        return $this;
+    }
+
+    public function getValidation(): ?bool
+    {
+        return $this->validation;
+    }
+
+    public function setValidation(?bool $validation): self
+    {
+        $this->validation = $validation;
 
         return $this;
     }

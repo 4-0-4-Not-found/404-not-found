@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ResetPassType;
 use App\Form\UserFormType1;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -51,7 +52,7 @@ class ViewClientController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $User->setRoles(['ROLE_USER']);
             $User->setActivationToken($token);
-
+            $User->setValidation(false);
             $User->setPassword($encoder->encodePassword($User,$User->getPassword()));
             $em=$this->getDoctrine()->getManager();
             $em->persist($User);
@@ -78,34 +79,6 @@ class ViewClientController extends AbstractController
 
     }
 
-    /**
-     * @Route("/activation/{token}", name="activation")
-     */
-    public function activation($token,UserRepository $users)
-    {
-        // On recherche si un utilisateur avec ce token existe dans la base de données
-        $user = $users->findOneBy(['activation_token' => $token]);
-
-        // Si aucun utilisateur n'est associé à ce token
-        if(!$user){
-            // On renvoie une erreur 404
-            throw $this->createNotFoundException('Cet utilisateur n\'existe pas');
-        }
-
-        // On supprime le token
-        $user->setActivationToken("");
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($user);
-        $entityManager->flush();
-
-        // On génère un message
-        $this->addFlash('message', 'Utilisateur activé avec succès');
-
-        // On retourne à l'accueil
-
-        return $this->render('activation.html.twig');
-
-    }
 
 
     /**

@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Service\generateToken;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
@@ -35,17 +37,18 @@ class UserController extends AbstractController
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setRoles(['ROLE_USER']);
+            $user->setActivationToken((new generateToken())->token())
+            ->setValidation(true);
+            $user->setRoles([$request->get('role')]);
             $user->setPassword($encoder->encodePassword($user,$user->getPassword()));
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('user_index');
         }
-
         return $this->render('user/new.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
@@ -67,19 +70,32 @@ class UserController extends AbstractController
      */
     public function edit(Request $request, User $user,UserPasswordEncoderInterface $encoder): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        if($user !== $this->getUser()) {
+            $form = $this->createForm(UserType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($encoder->encodePassword($user,$user->getPassword()));
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute('user_index');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
+                $this->getDoctrine()->getManager()->flush();
+                return $this->redirectToRoute('user_index');
+            }
+
+            return $this->render('user/edit.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }else{
+            if (($content = $request->getContent()) && $request->getContentType() === 'json') {
+                $userData = json_decode($content, true);
+                $user->setNom($userData['lname'])
+                     ->setPrenom($userData['fname'])
+                     ->setTel($userData['tel']);
+                $this->getDoctrine()->getManager()->flush();
+            }else{
+                return $this->json(['error'=>'bad request :p '],400);
+            }
+            return $this->json(["status"=>200],201);
         }
-
-        return $this->render('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**
@@ -92,7 +108,17 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
-
         return $this->redirectToRoute('user_index');
+    }
+    /**
+     * @Route("/activation/{id}", name="activation")
+     * @var User $user
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function  activation(User $user):Response
+    {
+        $user->setValidation(!$user->getValidation());
+        $this->getDoctrine()->getManager()->flush();
+        return $this->json([],200);
     }
 }

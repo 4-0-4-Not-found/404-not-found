@@ -66,9 +66,7 @@ class SecurityUserClientAuthenticator extends AbstractFormLoginAuthenticator imp
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
-
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
-
         if (!$user) {
             // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException('Email could not be found.');
@@ -79,6 +77,9 @@ class SecurityUserClientAuthenticator extends AbstractFormLoginAuthenticator imp
 
     public function checkCredentials($credentials, UserInterface $user)
     {
+        if (!$user->getValidation()){
+            return false ;
+        }
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
     }
 
@@ -92,10 +93,10 @@ class SecurityUserClientAuthenticator extends AbstractFormLoginAuthenticator imp
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
         return new RedirectResponse($this->urlGenerator->generate(in_array('ROLE_ADMIN',$token->getRoleNames())?'admindash':'activities'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
