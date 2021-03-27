@@ -1,0 +1,20 @@
+{% extends 'activities.html.twig' %}
+
+{% block tbody %}
+<br></br>
+    <div class="container">
+    <div class="row">
+        {% for produit in produits %}
+        <div class="col">
+{#        <div class="card" style="width:300px">#}
+            <img class="card-img-top" src="/uploads/images/{{produit.image}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{ produit.nom}}</h4>
+                <p class="card-text">{{ produit.url }}</p>
+                <a href="#" class="btn btn-primary">{{ produit.url }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock %}
