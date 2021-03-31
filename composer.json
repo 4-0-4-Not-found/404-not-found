@@ -10,7 +10,9 @@
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.8",
+        "hautelook/alice-bundle": "^2.9",
         "knplabs/knp-paginator-bundle": "^5.3",
+        "mbezhanov/faker-provider-collection": "^1.2",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^5.1",
         "swiftmailer/swiftmailer": "v5.4.0",
@@ -36,6 +38,7 @@
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
         "symfony/web-server-bundle": "4.4.*",
+        "symfony/webpack-encore-bundle": "^1.11",
         "symfony/yaml": "4.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Form\SearchActiviteType;
+use App\Form\SearchForm;
 use App\Repository\ProduitRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ActiviteRepository;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Form\FormTypeInterface;
 
 
 /**
@@ -52,10 +55,24 @@ class ManagmentController extends AbstractController
     /**
      * @Route("/managmentP", name="managmentP", methods={"GET"})
      */
-    public function inde(ProduitRepository $produitRepository): Response
+//    public function inde(ProduitRepository $produitRepository): Response
+//    {
+//        return $this->render('managment/Produits.html.twig', [
+//            'produits' => $produitRepository->findAll(),
+//        ]);
+//    }
+
+    public function product(ProduitRepository $produitRepository, Request $request): Response
     {
+        $data = new SearchData();
+        $data->page =$request->get('page',1);
+        $form = $this->createForm(SearchForm::class, $data);
+        $form->handleRequest($request);
+        $produits= $produitRepository->findSearch($data);
         return $this->render('managment/Produits.html.twig', [
-            'produits' => $produitRepository->findAll(),
+            'produits' => $produits,
+            'form'=> $form->createView()
         ]);
     }
+
 }

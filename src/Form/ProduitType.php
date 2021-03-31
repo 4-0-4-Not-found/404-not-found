@@ -14,7 +14,7 @@ class ProduitType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('url')
+            ->add('description')
             ->add('image',FileType::class, [
                 'label' => 'Brochure (PDF file)',
 
@@ -29,8 +29,9 @@ class ProduitType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
 
             ])
+            ->add('prix')
+            ->add('promo')
             // ...
-        ;
         ;
     }
 
