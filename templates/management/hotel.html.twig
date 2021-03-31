@@ -1,0 +1,19 @@
+{% extends 'activities.html.twig' %}
+{% block tbody %}
+
+    <div class="container">
+    <div class="row">
+        {% for article in articles %}
+
+        <div class="card" style="width:300px">
+            <img class="card-img-top" src="/uploads/images/{{athlete.image}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{ athlete.Id }}</h4>
+                <p class="card-text">{{ athlete.description }}</p>
+                <h4 class="card-title">{{ athlete.actions }}</h4>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

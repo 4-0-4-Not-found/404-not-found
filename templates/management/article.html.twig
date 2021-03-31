@@ -1,0 +1,123 @@
+{%  extends 'activities.html.twig' %}
+{% block tbody %}
+         <style>
+             *{
+                 margin: 0;
+                 padding: 0;
+                 font-family: sans-serif;
+                 outline: none;
+
+             }
+             body{
+
+             }
+             card-body{
+                 float: right;
+             }
+             voting{
+                 position: relative;
+                 border : solid #303a40;
+                 border-radius: 4px;
+                 padding: 5px;
+                 display: flex;
+                 justify-content: center;
+
+             }
+             input1{
+                 color: black;
+
+             }
+             button{
+                 color: black;
+                 background: none;
+                 border: none;
+                 font-size: 30px;
+                 padding: 0 15px ;
+                 cursor: pointer;
+             }
+             like{
+                 float: left;
+             }
+             dislike{
+                 float: right;
+             }
+
+         </style>
+    <div class="container">
+    <div class="center" >
+
+        <form method="POST" >
+            <input type="text" name="nom" width=100% >
+            <input type="submit" value="recherche">
+        </form>
+        {% for a in article %}
+
+        <div class="card" style="width:300px">
+            <img class="card-img-top" src="/uploads/images/{{a.image}}" alt="Card image" style="width:100%">
+            <div class="card-body">
+                <h4 class="card-title">{{ a.nom }}</h4>
+                <p class="card-text">{{ a.description }}</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+            </div>
+
+
+            <div class="like">
+                <button class="like_btn">
+                    <span id="icon"><i class="fa fa-thumbs-up"></i> </span>
+                    <span id="count">0</span> Like
+                </button>
+
+                <button class="dislike_btn">
+                    <span id="io"><i class="fa fa-thumbs-down"></i></span>
+                    <span id="calcul">0</span> dislike
+                </button>
+            </div>
+
+            <script type="text/javascript">
+                const dislikeBtn = document.querySelector(".dislike_btn");
+                let io = document.querySelector("#io");
+                const likeBtn = document.querySelector(".like_btn");
+                let likeIcon = document.querySelector("#icon");
+                let count = document.querySelector("#count");
+                let calcudislikeBtn = document.querySelector("#calcul");
+
+                //button clicked
+                 let faclicked = false;
+
+                likeBtn.addEventListener("click", () => {
+                    if (!faclicked) {
+                        faclicked = true;
+                        likeIcon.innerHTML ='<i class="fa fa-thumbs-up"></i>';
+                        count.textContent++;
+                    }
+                    else {
+                        faclicked = false;
+                        likeIcon.innerHTML = '<i class="fa fa-thumbs-up"></i>';
+                        count.textContent--;
+                    }
+
+
+                });
+                    //button clicked
+                daclicked =false;
+                    dislikeBtn.addEventListener("click",()=>{
+                        if(!daclicked) {
+                            daclicked =true;
+                            io.innerHTML='<i class="fa fa-thumbs-down"></i>';
+                            calcudislikeBtn.textContent++;
+                        }
+                        else {
+                            daclicked = false;
+                            io.innerHTML = '<i class="fa fa-thumbs-down"></i>';
+                            calcudislikeBtn.textContent--;
+
+                        }
+                    });
+
+
+            </script>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+{% endblock %}
