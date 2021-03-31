@@ -20,6 +20,8 @@
     "captcha-com/symfony-captcha-bundle": {
         "version": "4.2.12"
     },
+=======
+>>>>>>> 789bb0c9b8b82703b46854a609d8cc9e449a1b6b
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
@@ -474,6 +476,7 @@
     "symfony/stopwatch": {
         "version": "v4.4.19"
     },
+<<<<<<< HEAD
     "symfony/swiftmailer-bundle": {
         "version": "2.5",
         "recipe": {
