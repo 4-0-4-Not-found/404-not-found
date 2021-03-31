@@ -26,11 +26,12 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
+     * @Route("/new/{id}", name="article_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request,int $id): Response
     {
         $article = new Article();
+        $article->setUser($this->getUser());
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -52,7 +53,7 @@ class ArticleController extends AbstractController
             $entityManager->persist($article);
             $entityManager->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('activities');
         }
 
         return $this->render('article/new.html.twig', [
@@ -80,9 +81,22 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $file=$form->get('image')->getData();
+
+            $filename=md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $filename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+
+            }
+            $article->setImage($filename);
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('article_index');
+            return $this->redirectToRoute('activities');
         }
 
         return $this->render('article/edit.html.twig', [

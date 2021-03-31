@@ -1,11 +1,15 @@
-{% extends 'admindash.html.twig' %}
+{% extends 'activities.html.twig' %}
 
 {% block title %}New Article{% endblock %}
 
-{% block tbody %}
+{% block masthead %}
+<header class="masthead">
+    <div class="container">
     <h1>Create new Article</h1>
 
     {{ include('article/_form.html.twig') }}
 
     <a href="{{ path('article_index') }}">back to list</a>
+    </div>
+</header>
 {% endblock %}

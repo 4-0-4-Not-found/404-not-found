@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,6 +73,27 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $validation;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="client")
+     */
+    private $reservations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="user")
+     */
+    private $Articles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $image;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+        $this->Articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -216,6 +239,75 @@ class User implements UserInterface
     public function setValidation(?bool $validation): self
     {
         $this->validation = $validation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->addClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            $reservation->removeClient($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->Articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->Articles->contains($article)) {
+            $this->Articles[] = $article;
+            $article->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->Articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getUser() === $this) {
+                $article->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

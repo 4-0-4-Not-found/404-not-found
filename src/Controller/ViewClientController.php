@@ -54,6 +54,19 @@ class ViewClientController extends AbstractController
             $User->setActivationToken($token);
             $User->setValidation(false);
             $User->setPassword($encoder->encodePassword($User,$User->getPassword()));
+            $file=$form->get('image')->getData();
+
+            $filename=md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('images_directory'),
+                    $filename
+                );
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+
+            }
+            $User->setImage($filename);
             $em=$this->getDoctrine()->getManager();
             $em->persist($User);
             $em->flush();
@@ -67,7 +80,7 @@ class ViewClientController extends AbstractController
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Time for Symfony Mailer!')
                 ->text('Sending emails is fun again!')
-                ->html("<p>il faut confirmer votre compte <a href=http://127.0.0.1:8000/activation/$token>verfier</a></p>");
+                ->html("<p>il faut confirmer votre compte <a href=http://127.0.0.1:8000/activations/$token>verfier</a></p>");
 
             $mailer->send($email);
 

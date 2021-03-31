@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -28,7 +29,17 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
-
+    /**
+     * @Route("/search", name="user_search")
+     */
+    public function search(UserRepository $userRepository, Request $request): Response
+    {
+        $data=$request->get('search');
+        $user=$userRepository->findBy(['nom'=>$data]);
+        return $this->render('user/index.html.twig', [
+            'users' => $user,
+        ]);
+    }
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      */
@@ -64,7 +75,20 @@ class UserController extends AbstractController
             'user' => $user,
         ]);
     }
+    /**
+     * @Route("/Athlete/{id}", name="athtelearticles", methods={"GET"})
+     */
+    public function showathelete(int $id): Response
+    {
+        $Athtele=$this->getDoctrine()->getRepository(user::class)->find($id);
+        $article=$Athtele->getArticles();
 
+
+        return $this->render('management/athteleArticles.html.twig', [
+            'article' => $article,
+            'athlete' => $Athtele
+        ]);
+    }
     /**
      * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
      */
@@ -75,6 +99,7 @@ class UserController extends AbstractController
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $user->setRoles([$request->get('role')]);
                 $user->setPassword($encoder->encodePassword($user, $user->getPassword()));
                 $this->getDoctrine()->getManager()->flush();
                 return $this->redirectToRoute('user_index');

@@ -1,13 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'activities.html.twig' %}
 
 {% block title %}Edit Article{% endblock %}
 
-{% block body %}
-    <h1>Edit Article</h1>
+{% block masthead %}
+    <header class="masthead">
+        <div class="container">
+            {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
 
-    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+            <a href="{{ path('article_index') }}">back to list</a>
 
-    <a href="{{ path('article_index') }}">back to list</a>
+            {{ include('article/_delete_form.html.twig') }}
+        </div>
+    </header>
 
-    {{ include('article/_delete_form.html.twig') }}
+
+{#    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}#}
+
+{#    <a href="{{ path('article_index') }}">back to list</a>#}
+
+{#    {{ include('article/_delete_form.html.twig') }} #}
 {% endblock %}
+{% block body %}{% endblock %}

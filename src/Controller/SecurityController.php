@@ -46,7 +46,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/activation/{token}", name="activation")
+     * @Route("/activations/{token}", name="activations" )
      */
     public function activation($token,UserRepository $users)
     {
