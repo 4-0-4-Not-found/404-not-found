@@ -1,0 +1,35 @@
+
+{% extends 'activities.html.twig' %}
+{% block tbody %}
+<br> </br>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 20px;
+        }
+    </style>
+    <div class="container js-filter">
+        <div class="row">
+        <div class="col-md-3 ">
+        {% include 'hotel/_filtrer.html.twig'with {form:form} only %}
+        </div>
+        <div class ="col-md-9">
+            <div class="grid js-filter-content">
+
+                {% include'hotel/_hotel.html.twig' %}
+
+            {% endfor %}
+        </div>
+            <div class="mt-4 js-filter-pagination">
+            {{ knp_pagination_render(hotels) }}
+            </div>
+        </div>
+    </div>
+
+
+{#<div class="pagination">#}
+{#    {{ knp_pagination_render(hotels) }}#}
+{#</div>#}
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+<div class="card" style="width:300px" >
+    <img class="card-img-top" src="/uploads/images/{{hotel.image}}"  alt="Card image" >
+    <div class="card-body">
+        <h4 class="card-title">{{ hotel.nom }}</h4>
+
+        <a href="/management/streetmap">
+            <i class="fas fa-map-pin" style="color:darkgoldenrod " ></i>
+            <p class="card-text" style="color:#00afce"> {{ hotel.location }}</p></a>
+
+        {% if hotel.promotion %}
+            <div class="text text-warning">Promotion</div>
+        {% endif %}
+        <div>
+            <em class="text-muted text-primary">#{{ hotel.categories }}</em>
+
+        </div>
+             <p class="card-text" >  {{ hotel.activities }} </p>
+            <p class="card-title"> à partir de "{{ hotel.price }} Dt" </p>
+
+
+            <a href="{{ path('detail', {'nom': hotel.nom}) }}">
+                <button> Voir plus </button> </a>
+
+
+    </div>
+</div>
+{#<div>#}
+{#    {% for c in hotel.categories %}#}
+{#        <em class="text-muted text-primary">#{{ c.nbr_etoile }}</em>#}
+{#    {% endfor %}#}
+{#</div>#}

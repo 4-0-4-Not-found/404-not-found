@@ -1,0 +1,3 @@
+{% for hotel in hotels %}
+          {% include 'hotel/_card.html.twig' with {hotel:hotel} only %}
+{% endfor %}

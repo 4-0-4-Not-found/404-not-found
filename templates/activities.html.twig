@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Agency - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <link href="/client/css/styles.css" rel="stylesheet" />
+    {% block stylesheet %} {% endblock %}
+
+
+
+
+</head>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 20px;
+        }
+        .filter {
+            display: block;
+            position: sticky;
+            top:20px;
+        }
+    </style>
+<body id="page-top">
+<!-- Navigation-->
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="" /></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars ml-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">activitées</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Atheletes</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/management/managementH">Hotels</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Produits</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Groups</a></li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<!-- Masthead-->
+<header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">MORE THAN A HOTEL</div>
+        <div class="masthead-heading text-uppercase">A Luxury Stay Experience</div>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">Tell Me More</a>
+    </div>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-gap: 20px;
+        }
+        .filter {
+            display: block;
+            position: sticky;
+            top:20px;
+        }
+    </style>
+
+{#    {{ encore_entry_link_tags('app') }}#}
+{#    {{ encore_entry_script_tags('app') | replace({'src=':'defer src='}) |raw }}#}
+
+
+</header>
+
+<nav class="navbar navbar-dark bg-primary">
+    <a href="/" class="navbar-brand mb-0 h1">hotel</a>
+</nav>
+<div style="margin-top: 3rem;">
+    <script>
+        jQuery(document).ready(function() {
+            $('.js-datepicker').datepicker();
+        });
+    </script>
+{% block tbody %}
+
+{% endblock %}
+
+</div>
+<!-- Services-->
+<!-- Bootstrap core JS-->
+{% block js %}{% endblock %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Contact form JS-->
+<script src="/client/assets/mail/jqBootstrapValidation.js"></script>
+<script src="/client/assets/mail/contact_me.js"></script>
+<!-- Core theme JS-->
+<script src="/client/js/scripts.js"></script>
+
+</body>
+</html>
