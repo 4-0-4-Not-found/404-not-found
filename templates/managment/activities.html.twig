@@ -1,0 +1,29 @@
+{% extends 'activities.html.twig' %}
+
+{% block tbody %}
+<br> </br>
+    <div class="container">
+    {{ form(form) }}
+        <div class="grid">
+        {% for activite in activites %}
+       <div class="card">
+
+            <img class="card-img-top" src="/uploads/images/{{activite.image}}" alt="Card image" style="width:100%">
+                <h4 class="card-title">{{ activite.nom }}</h4>
+                <p class="card-text">{{ activite.description }}</p>
+                <a href="#" class="btn btn-primary">See Profile</a>
+                <i class="far fa-thumbs-up"></i>
+                <button class="js-likes"> <?= $activte->like_count ?> </button>
+                <span class="js.label">J'aime</span>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+
+
+        <div class="d-flex justify-content-center">
+            {% do activites.setPageRange(2)%}
+        {{ knp_pagination_render(activites, 'managment/index.html.twig') }}
+        </div>
+
+{% endblock %}
