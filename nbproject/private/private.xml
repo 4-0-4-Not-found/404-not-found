@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/entity/user.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/AdduserFXML.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/LoginController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/login.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/dao/UserService.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/updateuser.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/Accueil.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/AddUserController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/manifest.mf</file>
+            <file>file:/C:/wamp64/www/PIDEV/nbproject/jfx-impl.xml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/FXMLDocumentController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/DataList.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/UpdateuserController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/build.xml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/test/PIDEV.java</file>
+        </group>
+    </open-files>
+</project-private>
