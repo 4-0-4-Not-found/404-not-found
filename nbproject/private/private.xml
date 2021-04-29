@@ -5,18 +5,30 @@
         <group>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/entity/user.java</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/AdduserFXML.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/FrontController.java</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/LoginController.java</file>
-            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/login.fxml</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/dao/UserService.java</file>
-            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/updateuser.fxml</file>
-            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/Accueil.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/piestat.fxml</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/AddUserController.java</file>
-            <file>file:/C:/wamp64/www/PIDEV/manifest.mf</file>
-            <file>file:/C:/wamp64/www/PIDEV/nbproject/jfx-impl.xml</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Alert/AlertDialog.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/PiestatController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/randomStringFunction.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/MailService.java</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/FXMLDocumentController.java</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/DataList.java</file>
-            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/UpdateuserController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/dao/IService.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/nbproject/project.xml</file>
             <file>file:/C:/wamp64/www/PIDEV/build.xml</file>
+            <file>file:/C:/wamp64/www/PIDEV/nbproject/private/configs/Run_in_Browser.properties</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/utils/DataBase.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/nbproject/configs/Run_in_Browser.properties</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/Item_ProduitController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/nbproject/configs/Run_as_WebStart.properties</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/ValidationController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/views/validation.fxml</file>
+            <file>file:/C:/wamp64/www/PIDEV/manifest.mf</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/home_ProduitController.java</file>
+            <file>file:/C:/wamp64/www/PIDEV/src/pidev/Controller/UpdateuserController.java</file>
             <file>file:/C:/wamp64/www/PIDEV/src/pidev/test/PIDEV.java</file>
         </group>
     </open-files>

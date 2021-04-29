@@ -5,6 +5,12 @@
  */
 package pidev.dao;
 
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
+import de.mkammerer.argon2.Argon2Factory.Argon2Types;
+import java.time.Duration;
+import java.time.Instant;
+
 import pidev.dao.IService;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,19 +22,19 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import pidev.Controller.MailService;
+import pidev.Controller.randomStringFunction;
 import pidev.utils.DataBase;
 import pidev.entity.user;
-
 /**
  *
  * @author momen
  */
 public class UserService implements IService<user> {
-   
+    Argon2 argon2 = Argon2Factory.create(Argon2Types.ARGON2id); 
     private static UserService instance;
     private Statement st;
     private ResultSet rs;
-
     public UserService(){
         DataBase cs=DataBase.getInstance();
         try {
@@ -46,10 +52,13 @@ public class UserService implements IService<user> {
 
     @Override
     public void insert(user o) {
-        String req="INSERT INTO `user` (`email`, `roles`, `password`, `username`, `nom`, `prenom`, `tel`, `activation_token`, `validation`, `image`) VALUES ('"+o.getEmail()+"', '[\\\"ROLE_USER\\\"]', '"+o.getPassword()+"', '"+o.getUsername()+"', '"+o.getNom()+"', '"+o.getPrenom()+"', '"+o.getTelephone()+"', '"+o.getActiv()+"', '0', '');";
+        String r=randomStringFunction.activationS();
+        String req="INSERT INTO `user` (`email`, `roles`, `password`, `username`, `nom`, `prenom`, `tel`, `activation_token`, `validation`, `image`) VALUES ('"+o.getEmail()+"', '[\\\"ROLE_USER\\\"]', '"+argon2.hash(4, 65536, 1,o.getPassword()) +"', '"+o.getUsername()+"', '"+o.getNom()+"', '"+o.getPrenom()+"', '"+o.getTelephone()+"', '"+r+"', '0', '');";
         try {
             st.executeUpdate(req);
-        } catch (SQLException ex) {
+            MailService.sendMail(o.getEmail(),r);
+
+        } catch (Exception ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -89,7 +98,8 @@ public class UserService implements IService<user> {
         } catch (SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return list;    }
+        return list;    
+    }
 
     @Override
     public user displayById(int id) {
@@ -125,14 +135,23 @@ public class UserService implements IService<user> {
         } catch (SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;    }
+        return false;
+    }
     public boolean login(String email,String password){
-        String qery="select * from user where email = '"+email+"' AND password ='"+password+"' AND validation ='"+1+"'";
+        String test;
+        String qery="select * from user where email = '"+email+"' AND validation ='"+1+"'";
+
         try {
+               
             rs=st.executeQuery(qery);
-           
+            
             if (rs.next()) {
-                return true;
+                test=rs.getString("password");
+                
+                if(argon2.verify(test, password)){
+                    return true; 
+                }
+               
             }
             
         } catch (SQLException ex) {
@@ -140,4 +159,60 @@ public class UserService implements IService<user> {
         }
         return false; 
     }
-}
+   public List<user> displayAllList() {
+       String req="select * from user";
+        List<user> list=new ArrayList<>();
+        
+        try {
+            rs=st.executeQuery(req);
+            while(rs.next()){
+                user p=new user();
+                 p.setId(rs.getInt(1));
+                p.setEmail(rs.getString("email"));
+                p.setPrenom(rs.getString("prenom"));
+                p.setNom(rs.getString("nom"));  
+                p.setTelephone(rs.getInt("tel"));
+                p.setUsername(rs.getString("username"));
+                p.setValid(rs.getInt("validation"));
+                p.setRole(rs.getString("validation"));
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+         }
+   public boolean validation(String email,String code){
+        String qry = "UPDATE user SET validation = '1' WHERE email = '"+email+"' AND  activation_token = '"+code+"'";
+        try {        
+            if (st.executeUpdate(qry) > 0) {
+               return true;  
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
+    }
+     public user displayByemail(String mail) {
+         String req="select * from user where email ="+mail;
+           user p=new user();
+        try {
+            rs=st.executeQuery(req);
+           // while(rs.next()){
+      
+            rs.next();
+                p.setId(rs.getInt(1));
+                p.setEmail(rs.getString("email"));
+                p.setPrenom(rs.getString("prenom"));
+                p.setRole(rs.getString("roles"));
+                p.setNom(rs.getString("nom"));  
+                p.setTelephone(rs.getInt("tel"));
+                p.setUsername(rs.getString("username"));
+                p.setValid(rs.getInt("validation"));
+            //}  
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return p;    }
+}  

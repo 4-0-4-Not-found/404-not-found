@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pidev.Controller.AddUserController">
+<AnchorPane prefHeight="552.0" prefWidth="946.0" style="-fx-background-color: #0f52ba;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pidev.Controller.AddUserController">
    <children>
-      <SplitPane dividerPositions="0.5" layoutX="55.0" layoutY="39.0" prefHeight="322.0" prefWidth="466.0">
+      <SplitPane dividerPositions="0.5" layoutX="76.0" layoutY="56.0" prefHeight="441.0" prefWidth="795.0" style="-fx-background-radius: 10;">
          <items>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="inscription" layoutX="71.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Button" />
-                  <TextField fx:id="username" layoutX="12.0" layoutY="84.0" prefHeight="25.0" prefWidth="99.0" />
-                  <TextField fx:id="nom" layoutX="122.0" layoutY="84.0" prefHeight="25.0" prefWidth="99.0" />
-                  <TextField fx:id="prenom" layoutX="14.0" layoutY="120.0" prefHeight="25.0" prefWidth="99.0" />
-                  <TextField fx:id="telephone" layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="99.0" />
-                  <TextField fx:id="email" layoutX="14.0" layoutY="160.0" prefHeight="25.0" prefWidth="99.0" />
-                  <TextField fx:id="password" layoutX="122.0" layoutY="160.0" prefHeight="25.0" prefWidth="99.0" />
+                  <ImageView fx:id="image" fitHeight="428.0" fitWidth="384.0" layoutX="6.0" layoutY="6.0" pickOnBounds="true" style="-fx-background-radius: 10;">
+                     <image>
+                        <Image url="file:/C:/wamp64/www/PIDEV/src/pidev/views/JF7VEP.jpg" />
+                     </image>
+                  </ImageView>
+               </children></AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="460.0" prefWidth="464.0">
+               <children>
+                  <Button fx:id="inscription" layoutX="124.0" layoutY="375.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" style="-fx-background-radius: 10; -fx-background-color: #111e6c;" text="Inscription" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Button>
+                  <TextField fx:id="username" layoutX="21.0" layoutY="140.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="nom" layoutX="197.0" layoutY="140.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="prenom" layoutX="21.0" layoutY="212.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="telephone" layoutX="202.0" layoutY="212.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="email" layoutX="21.0" layoutY="279.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <TextField fx:id="password" layoutX="202.0" layoutY="279.0" prefHeight="25.0" prefWidth="157.0" style="-fx-background-radius: 10;" />
+                  <Label layoutX="130.0" layoutY="37.0" text="Inscription" textFill="#0f52ba">
+                     <font>
+                        <Font name="Poppins Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="21.0" layoutY="122.0" text="Username:" />
+                  <Label layoutX="202.0" layoutY="262.0" text="Password:" />
+                  <Label layoutX="21.0" layoutY="262.0" text="Email:" />
+                  <Label layoutX="201.0" layoutY="195.0" text="Telephone:" />
+                  <Label layoutX="21.0" layoutY="195.0" text="Prenom:" />
+                  <Label layoutX="202.0" layoutY="122.0" text="Nom:" />
+                  <Label layoutX="25.0" layoutY="322.0" text="Oublier le mot de passe?" textFill="#0f52ba" />
+                  <Label layoutX="25.0" layoutY="348.0" text="Login?" textFill="#0f52ba" />
                </children>
             </AnchorPane>
          </items>

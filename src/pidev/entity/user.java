@@ -11,21 +11,22 @@ package pidev.entity;
  */
 public class user {
     int id,telephone,valid;
-    String username,nom,prenom,email,activ,image,password;
+    String username,nom,prenom,email,activ,image,password,role;
 
     public user() {
     }
 
-    public user(int telephone, String username, String nom, String prenom, String email, String password) {
+    public user(int telephone, String username, String nom, String prenom, String email, String password,String role) {
         this.telephone = telephone;
         this.username = username;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
-    public user(int id, int telephone, String username, String nom, String prenom, String email, String activ, int valid, String image, String password) {
+    public user(int id, int telephone, String username, String nom, String prenom, String email, String activ, int valid, String image, String password,String role) {
         this.id = id;
         this.telephone = telephone;
         this.username = username;
@@ -36,6 +37,7 @@ public class user {
         this.valid = valid;
         this.image = image;
         this.password = password;
+        this.role = role;
     }
 
     
@@ -81,6 +83,10 @@ public class user {
         return password;
     }
 
+    public String getRole() {
+        return role;
+    }
+    
     
     public void setId(int id) {
         this.id = id;
@@ -120,6 +126,10 @@ public class user {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
     
     

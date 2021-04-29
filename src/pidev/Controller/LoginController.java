@@ -5,13 +5,21 @@
  */
 package pidev.Controller;
 
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import pidev.dao.UserService;
 
 /**
@@ -37,11 +45,20 @@ public class LoginController implements Initializable {
         login.setOnMouseClicked((event) -> {
             UserService pdao = UserService.getInstance();
             if(pdao.login(email.getText(), password.getText())){
-              Alert alert = new Alert(Alert.AlertType.INFORMATION);
-              alert.setTitle("success");
-              alert.setHeaderText(null);
-              alert.setContentText("user login with success!");
-              alert.show();
+                
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/pidev/views/Accueil.fxml"));
+                    Parent root = loader.load();
+                    UpdateuserController controller=loader.getController();
+                    controller.receiveData( pdao.displayByemail(email.getText()));
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(root));
+                    stage.setTitle("Second Window");
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+             
             }else{
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
               alert.setTitle("Failed");

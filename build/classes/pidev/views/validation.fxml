@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0f52ba;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16" fx:controller="pidev.Controller.ValidationController">
+   <children>
+      <AnchorPane layoutX="77.0" layoutY="44.0" prefHeight="311.0" prefWidth="435.0" style="-fx-background-color: #eeeeee;">
+         <children>
+            <Label fx:id="L_mail" layoutX="51.0" layoutY="101.0" text="Email:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="L_code" layoutX="51.0" layoutY="170.0" text="Code:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="115.0" layoutY="25.0" text="Validation">
+               <font>
+                  <Font name="Poppins Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="Email" layoutX="51.0" layoutY="129.0" prefHeight="33.0" prefWidth="333.0" style="-fx-background-radius: 15;" />
+            <TextField fx:id="code" layoutX="51.0" layoutY="198.0" prefHeight="33.0" prefWidth="333.0" style="-fx-background-radius: 15;" />
+            <Button fx:id="validate" layoutX="144.0" layoutY="257.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="137.0" style="-fx-background-radius: 15; -fx-background-color: #111e6c;" text="Validate" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

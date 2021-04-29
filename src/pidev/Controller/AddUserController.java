@@ -7,13 +7,20 @@ package pidev.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import pidev.dao.UserService;
 import pidev.entity.user;
 
@@ -53,16 +60,20 @@ public class AddUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        inscription.setOnAction(event -> {
-            user p = new user(Integer.parseInt(telephone.getText()),username.getText(),nom.getText(), prenom.getText(),email.getText(),password.getText());
+            user p = new user(Integer.parseInt(telephone.getText()),username.getText(),nom.getText(), prenom.getText(),email.getText(),password.getText(),"[\"ROLE_USER\"]");
             UserService pdao = UserService.getInstance();
-            pdao.insert(p);      
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Personne insérée avec succés!");
-            alert.show();
-            nom.setText("");
-            prenom.setText("");
+           try {
+               pdao.insert(p);
+                Parent page1 = FXMLLoader.load(getClass().getResource("/pidev/views/validation.fxml"));
+                Scene scene = new Scene(page1);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+           } catch (Exception ex) {
+               Logger.getLogger(AddUserController.class.getName()).log(Level.SEVERE, null, ex);
+           }
+                  
+            
         });
     }    
     
